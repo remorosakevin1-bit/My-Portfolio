@@ -1,0 +1,2165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Kevin Remorosa — Graphic Designer, Data Specialist, GIS & Virtual Assistant.">
+<meta name="theme-color" content="#050505">
+<title>Kevin Remorosa | Graphic Designer & Data Specialist</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+    font-family:"DM Sans",sans-serif;
+    background:#050505;
+    color:#fff;
+    overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+
+/* =========================
+   ANIMATED BACKGROUND
+========================= */
+
+#webthreads{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:-3;
+    background:#050505;
+}
+
+#webthreads canvas{
+    width:100%;
+    height:100%;
+    display:block;
+}
+
+.background-overlay{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    pointer-events:none;
+    background:
+        radial-gradient(circle at 50% 15%,rgba(124,58,237,.12),transparent 35%),
+        linear-gradient(180deg,rgba(5,5,5,.28),rgba(5,5,5,.9));
+}
+
+.noise{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+    opacity:.025;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    height:82px;
+    padding:0 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    z-index:100;
+    transition:.3s ease;
+}
+
+.navbar.scrolled{
+    background:rgba(5,5,5,.78);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:"Space Grotesk",sans-serif;
+    font-weight:700;
+    font-size:21px;
+}
+
+.logo-mark{
+    width:36px;
+    height:36px;
+    border-radius:10px;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(135deg,#7c3aed,#00d4ff);
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:34px;
+}
+
+.nav-links a{
+    color:#bdbdc6;
+    font-size:14px;
+    transition:.25s;
+}
+
+.nav-links a:hover{color:#fff}
+
+.nav-contact{
+    padding:11px 18px;
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:100px;
+    background:rgba(255,255,255,.05);
+}
+
+.menu-button{
+    display:none;
+    border:0;
+    background:none;
+    cursor:pointer;
+}
+
+.menu-button span{
+    display:block;
+    width:26px;
+    height:2px;
+    background:white;
+    margin:5px 0;
+}
+
+/* =========================
+   SOUND CONTROL
+========================= */
+
+.sound-toggle{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(10,10,12,.65);
+    backdrop-filter:blur(15px);
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    z-index:999;
+    display:grid;
+    place-items:center;
+    transition:.3s ease;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+.sound-toggle:hover{
+    transform:translateY(-4px) scale(1.05);
+    border-color:rgba(167,139,250,.6);
+    box-shadow:0 12px 35px rgba(124,58,237,.25);
+}
+
+.sound-toggle.active{
+    border-color:rgba(34,211,238,.5);
+    box-shadow:0 0 25px rgba(34,211,238,.2);
+}
+
+/* =========================
+   GENERAL
+========================= */
+
+main,footer{position:relative;z-index:5}
+
+.section{
+    width:min(1180px,88%);
+    margin:auto;
+    padding:130px 0;
+}
+
+.eyebrow{
+    color:#9999a5;
+    letter-spacing:.2em;
+    font-size:11px;
+    font-weight:600;
+    margin-bottom:18px;
+}
+
+.section-heading{margin-bottom:65px}
+.section-heading.center{text-align:center}
+
+.section-heading h2,
+.skills h2,
+.contact h2{
+    font-family:"Space Grotesk",sans-serif;
+    font-size:clamp(42px,6vw,72px);
+    line-height:1;
+    letter-spacing:-.045em;
+}
+
+.section-heading h2 span,
+.skills h2 span,
+.contact h2 span,
+.hero h1 span{
+    background:linear-gradient(90deg,#a78bfa,#22d3ee);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    position:relative;
+}
+
+.hero-content{max-width:920px}
+
+.available{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:8px 13px;
+    border-radius:100px;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.045);
+    color:#bdbdc5;
+    font-size:12px;
+    margin-bottom:35px;
+}
+
+.available-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#22c55e;
+    box-shadow:0 0 15px rgba(34,197,94,.8);
+}
+
+.hero h1{
+    font-family:"Space Grotesk",sans-serif;
+    font-size:clamp(55px,8vw,105px);
+    line-height:.98;
+    letter-spacing:-.055em;
+}
+
+.hero-description{
+    max-width:680px;
+    margin-top:30px;
+    color:#aaaab4;
+    font-size:17px;
+    line-height:1.75;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:13px;
+    margin-top:35px;
+    flex-wrap:wrap;
+}
+
+.button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
+    padding:14px 21px;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.button.primary{
+    background:linear-gradient(100deg,#7c3aed,#6366f1);
+    box-shadow:0 10px 35px rgba(124,58,237,.2);
+}
+
+.button.primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 45px rgba(124,58,237,.4);
+}
+
+.button.secondary{
+    border:1px solid rgba(255,255,255,.13);
+    background:rgba(255,255,255,.045);
+    color:#ddd;
+}
+
+.button.secondary:hover{
+    background:rgba(255,255,255,.09);
+}
+
+.hero-stats{
+    display:flex;
+    gap:45px;
+    margin-top:70px;
+    padding-top:25px;
+    border-top:1px solid rgba(255,255,255,.1);
+}
+
+.hero-stats div{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+.hero-stats strong{font-size:14px}
+.hero-stats small{color:#85858f;font-size:11px}
+
+.scroll-indicator{
+    position:absolute;
+    right:0;
+    bottom:50px;
+    color:#666671;
+    font-size:10px;
+    letter-spacing:.15em;
+    writing-mode:vertical-rl;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.scroll-indicator span{
+    width:1px;
+    height:50px;
+    background:linear-gradient(white,transparent);
+}
+
+/* =========================
+   ABOUT
+========================= */
+
+.about-grid{
+    display:grid;
+    grid-template-columns:.75fr 1.25fr;
+    gap:70px;
+    align-items:center;
+}
+
+.profile-card{
+    padding:35px;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.045);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+}
+
+.profile-placeholder{
+    height:300px;
+    display:grid;
+    place-items:center;
+    margin-bottom:25px;
+    border-radius:15px;
+    font-family:"Space Grotesk";
+    font-size:80px;
+    font-weight:700;
+    background:
+        radial-gradient(circle at 30% 20%,#7c3aed,transparent 45%),
+        linear-gradient(135deg,#17131f,#080808);
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.profile-card h3{
+    font-family:"Space Grotesk";
+    font-size:22px;
+}
+
+.profile-card p{
+    color:#888893;
+    margin-top:5px;
+}
+
+.profile-line{
+    width:100%;
+    height:1px;
+    background:rgba(255,255,255,.1);
+    margin:25px 0 15px;
+}
+
+.profile-card small{color:#777782}
+
+.about-text{
+    color:#9d9da7;
+    line-height:1.8;
+    font-size:15px;
+}
+
+.about-text p{margin-bottom:20px}
+
+.about-text .large-text{
+    color:#d2d2d8;
+    font-size:21px;
+    line-height:1.6;
+}
+
+.about-text strong{color:white}
+
+.text-link{
+    display:inline-block;
+    margin-top:15px;
+    color:#a78bfa;
+    font-size:14px;
+    border-bottom:1px solid #a78bfa;
+    padding-bottom:3px;
+}
+
+/* =========================
+   SERVICES
+========================= */
+
+.service-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.service-card{
+    position:relative;
+    padding:30px;
+    min-height:370px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:17px;
+    background:rgba(255,255,255,.04);
+    backdrop-filter:blur(15px);
+    transition:.3s;
+}
+
+.service-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(139,92,246,.5);
+}
+
+.service-number{
+    position:absolute;
+    top:25px;
+    right:25px;
+    color:#4d4d57;
+    font-size:11px;
+}
+
+.service-icon{
+    font-size:35px;
+    margin-top:25px;
+    margin-bottom:50px;
+    color:#a78bfa;
+}
+
+.service-card h3{
+    font-family:"Space Grotesk";
+    font-size:20px;
+    margin-bottom:15px;
+}
+
+.service-card p{
+    color:#858590;
+    font-size:13px;
+    line-height:1.7;
+}
+
+.tags{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+    margin-top:25px;
+}
+
+.tags span{
+    font-size:9px;
+    color:#888894;
+    border:1px solid rgba(255,255,255,.09);
+    padding:6px 8px;
+    border-radius:5px;
+}
+
+/* =========================
+   PORTFOLIO
+========================= */
+
+.portfolio-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.project{
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:18px;
+    background:rgba(255,255,255,.035);
+}
+
+.project-large{grid-row:span 2}
+.project-wide{grid-column:span 2}
+
+.project-image{
+    height:300px;
+    position:relative;
+    display:flex;
+    align-items:flex-end;
+    padding:25px;
+    overflow:hidden;
+    transition:.5s;
+}
+
+.project-large .project-image{height:500px}
+.project-wide .project-image{height:300px}
+
+.project:hover .project-image{transform:scale(1.025)}
+
+.project-image::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(circle at 30% 30%,rgba(139,92,246,.8),transparent 40%);
+}
+
+.project-image::after{
+    content:"";
+    position:absolute;
+    inset:25%;
+    border:1px solid rgba(255,255,255,.15);
+    transform:rotate(-12deg) scale(1.2);
+}
+
+.project-one{background:linear-gradient(135deg,#191221,#08080b)}
+.project-two{background:linear-gradient(135deg,#07151c,#0c0c0d)}
+.project-three{background:linear-gradient(135deg,#141023,#08080b)}
+.project-four{background:linear-gradient(135deg,#07151c,#08080b)}
+
+.project-image span{
+    position:relative;
+    z-index:2;
+    font-size:10px;
+    letter-spacing:.2em;
+}
+
+.project-info{
+    padding:20px 22px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.project-info p{
+    font-size:9px;
+    color:#777782;
+    letter-spacing:.15em;
+    margin-bottom:7px;
+}
+
+.project-info h3{
+    font-family:"Space Grotesk";
+    font-size:19px;
+}
+
+.project-info a{
+    width:40px;
+    height:40px;
+    display:grid;
+    place-items:center;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:50%;
+    color:#aaa;
+}
+
+.portfolio-note{
+    text-align:center;
+    margin-top:35px;
+    color:#666671;
+    font-size:11px;
+}
+
+/* =========================
+   SKILLS
+========================= */
+
+.skills-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:100px;
+    align-items:center;
+}
+
+.skills-description{
+    max-width:470px;
+    color:#888893;
+    line-height:1.8;
+    margin-top:25px;
+}
+
+.skills-list{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.skill{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:8px;
+}
+
+.skill span{font-size:13px}
+.skill strong{font-size:11px;color:#777782}
+
+.skill i{
+    grid-column:1/-1;
+    display:block;
+    height:2px;
+    background:rgba(255,255,255,.1);
+    overflow:hidden;
+}
+
+.skill b{
+    display:block;
+    height:100%;
+    background:linear-gradient(90deg,#7c3aed,#00d4ff);
+}
+
+.software-cloud{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:100px;
+}
+
+.software-cloud span{
+    padding:11px 15px;
+    border:1px solid rgba(255,255,255,.09);
+    background:rgba(255,255,255,.035);
+    border-radius:100px;
+    color:#888893;
+    font-size:11px;
+}
+
+/* =========================
+   EXPERIENCE
+========================= */
+
+.timeline{
+    max-width:900px;
+    margin:auto;
+    border-left:1px solid rgba(255,255,255,.1);
+}
+
+.timeline-item{
+    position:relative;
+    display:grid;
+    grid-template-columns:180px 1fr;
+    gap:50px;
+    padding:0 0 65px 45px;
+}
+
+.timeline-item:last-child{padding-bottom:0}
+
+.timeline-dot{
+    position:absolute;
+    left:-5px;
+    top:3px;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:#8b5cf6;
+    box-shadow:0 0 20px rgba(139,92,246,.8);
+}
+
+.timeline-date{
+    color:#70707a;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+}
+
+.timeline-item h3{
+    font-family:"Space Grotesk";
+    font-size:23px;
+    margin-bottom:12px;
+}
+
+.timeline-item p{
+    color:#858590;
+    line-height:1.8;
+    font-size:14px;
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact{padding-bottom:100px}
+
+.contact-box{
+    text-align:center;
+    padding:100px 30px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:25px;
+    background:
+        radial-gradient(circle at 50% 0%,rgba(124,58,237,.18),transparent 50%),
+        rgba(255,255,255,.035);
+    backdrop-filter:blur(20px);
+}
+
+.contact-box>p:not(.eyebrow){
+    max-width:560px;
+    margin:25px auto 30px;
+    color:#888893;
+    line-height:1.8;
+}
+
+.contact-links{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:25px;
+    margin-top:50px;
+}
+
+.contact-links a{
+    color:#777782;
+    font-size:12px;
+    transition:.2s;
+}
+
+.contact-links a:hover{color:white}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    width:88%;
+    max-width:1180px;
+    margin:auto;
+    padding:30px 0 40px;
+    border-top:1px solid rgba(255,255,255,.08);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.footer-logo{
+    font-family:"Space Grotesk";
+    font-weight:700;
+}
+
+footer p,footer a{
+    color:#666671;
+    font-size:10px;
+}
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(35px);
+    transition:opacity .8s ease,transform .8s ease;
+}
+
+.reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    .nav-links{
+        position:absolute;
+        top:82px;
+        left:5%;
+        right:5%;
+        display:none;
+        flex-direction:column;
+        padding:25px;
+        background:rgba(10,10,12,.96);
+        border:1px solid rgba(255,255,255,.1);
+        border-radius:15px;
+        backdrop-filter:blur(20px);
+    }
+
+    .nav-links.active{display:flex}
+
+    .menu-button{display:block}
+
+    .about-grid,
+    .skills-grid{
+        grid-template-columns:1fr;
+        gap:50px;
+    }
+
+    .service-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .hero h1{
+        font-size:clamp(48px,12vw,80px);
+    }
+}
+
+@media(max-width:600px){
+
+    .section{
+        width:90%;
+        padding:90px 0;
+    }
+
+    .navbar{padding:0 5%}
+
+    .hero{min-height:100svh}
+
+    .hero-description{font-size:15px}
+
+    .hero-stats{
+        gap:20px;
+        flex-wrap:wrap;
+        margin-top:50px;
+    }
+
+    .scroll-indicator{display:none}
+
+    .service-grid{
+        grid-template-columns:1fr;
+    }
+
+    .portfolio-grid{
+        grid-template-columns:1fr;
+    }
+
+    .project-large,
+    .project-wide{
+        grid-row:auto;
+        grid-column:auto;
+    }
+
+    .project-large .project-image,
+    .project-image,
+    .project-wide .project-image{
+        height:280px;
+    }
+
+    .timeline-item{
+        grid-template-columns:1fr;
+        gap:12px;
+        padding-left:30px;
+    }
+
+    .software-cloud{margin-top:60px}
+
+    .contact-box{padding:70px 20px}
+
+    footer{
+        flex-direction:column;
+        gap:15px;
+        text-align:center;
+    }
+
+    .sound-toggle{
+        width:44px;
+        height:44px;
+        right:18px;
+        bottom:18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     BACKGROUND MUSIC
+     Replace this URL with your
+     own MP3 file if desired.
+========================= -->
+
+<audio id="backgroundMusic" loop preload="auto">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<!-- SOUND BUTTON -->
+<button
+    id="soundToggle"
+    class="sound-toggle"
+    aria-label="Toggle background sound"
+    title="Toggle background sound">
+    🔇
+</button>
+
+<!-- ANIMATED WEBTHREADS BACKGROUND -->
+<div id="webthreads"></div>
+<div class="background-overlay"></div>
+<div class="noise"></div>
+
+<!-- NAVIGATION -->
+<header class="navbar" id="navbar">
+
+    <a href="#home" class="logo">
+        <span class="logo-mark">K</span>
+    </a>
+
+    <button class="menu-button" id="menuButton" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#work">Portfolio</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact" class="nav-contact">Let's Talk</a>
+    </nav>
+
+</header>
+
+<main>
+
+<!-- HERO -->
+<section id="home" class="section hero">
+
+    <div class="hero-content reveal">
+
+        <div class="available">
+            <span class="available-dot"></span>
+            Available for opportunities
+        </div>
+
+        <p class="eyebrow">
+            GRAPHIC DESIGN • DATA • DIGITAL
+        </p>
+
+        <h1>
+            Creative ideas.<br>
+            <span>Data-driven results.</span>
+        </h1>
+
+        <p class="hero-description">
+            Hi, I'm Kevin — a detail-oriented professional
+            specializing in graphic design, data management,
+            digital content, mapping, and administrative support.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#work" class="button primary">
+                View My Work <span>↗</span>
+            </a>
+
+            <a href="#contact" class="button secondary">
+                Let's Work Together
+            </a>
+
+        </div>
+
+        <div class="hero-stats">
+
+            <div>
+                <strong>Design</strong>
+                <small>Creative Visuals</small>
+            </div>
+
+            <div>
+                <strong>Data</strong>
+                <small>Management & Analysis</small>
+            </div>
+
+            <div>
+                <strong>GIS</strong>
+                <small>Mapping & Visualization</small>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="scroll-indicator">
+        <span></span>
+        Scroll to explore
+    </div>
+
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section about">
+
+    <div class="section-heading reveal">
+
+        <p class="eyebrow">ABOUT ME</p>
+
+        <h2>
+            Where creativity<br>
+            meets <span>precision.</span>
+        </h2>
+
+    </div>
+
+    <div class="about-grid">
+
+        <div class="profile-card reveal">
+
+            <div class="profile-placeholder">
+                KR
+            </div>
+
+            <h3>Kevin Remorosa</h3>
+
+            <p>Graphic Designer & Data Specialist</p>
+
+            <div class="profile-line"></div>
+
+            <small>Philippines</small>
+
+        </div>
+
+        <div class="about-text reveal">
+
+            <p class="large-text">
+                I combine creative visual design with
+                structured data management to create work
+                that is both <strong>visually engaging</strong>
+                and <strong>purpose-driven.</strong>
+            </p>
+
+            <p>
+                My professional background includes project
+                monitoring, data management, dashboard development,
+                GIS mapping, administrative coordination,
+                digital content creation, and graphic design.
+            </p>
+
+            <p>
+                I'm passionate about learning new technologies
+                and transforming ideas into practical,
+                professional, and effective digital solutions.
+            </p>
+
+            <a href="#contact" class="text-link">
+                Let's create something →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="section">
+
+    <div class="section-heading center reveal">
+
+        <p class="eyebrow">WHAT I DO</p>
+
+        <h2>
+            Skills that turn ideas<br>
+            into <span>solutions.</span>
+        </h2>
+
+    </div>
+
+    <div class="service-grid">
+
+        <article class="service-card reveal">
+
+            <div class="service-number">01</div>
+
+            <div class="service-icon">✦</div>
+
+            <h3>Graphic Design</h3>
+
+            <p>
+                Professional visual content for social media,
+                marketing, presentations, branding,
+                and digital platforms.
+            </p>
+
+            <div class="tags">
+                <span>Social Media</span>
+                <span>Branding</span>
+                <span>Marketing</span>
+            </div>
+
+        </article>
+
+        <article class="service-card reveal">
+
+            <div class="service-number">02</div>
+
+            <div class="service-icon">◈</div>
+
+            <h3>Data Management</h3>
+
+            <p>
+                Accurate data entry, organization, validation,
+                reporting, dashboards, and information management.
+            </p>
+
+            <div class="tags">
+                <span>Excel</span>
+                <span>Power BI</span>
+                <span>Reports</span>
+            </div>
+
+        </article>
+
+        <article class="service-card reveal">
+
+            <div class="service-number">03</div>
+
+            <div class="service-icon">◎</div>
+
+            <h3>GIS & Mapping</h3>
+
+            <p>
+                Mapping, geospatial data visualization,
+                geotagging, spatial analysis, and map production.
+            </p>
+
+            <div class="tags">
+                <span>QGIS</span>
+                <span>Mapping</span>
+                <span>GIS</span>
+            </div>
+
+        </article>
+
+        <article class="service-card reveal">
+
+            <div class="service-number">04</div>
+
+            <div class="service-icon">+</div>
+
+            <h3>Virtual Assistance</h3>
+
+            <p>
+                Reliable administrative, digital, research,
+                and content support to keep your business organized.
+            </p>
+
+            <div class="tags">
+                <span>Admin</span>
+                <span>Research</span>
+                <span>Support</span>
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+<!-- PORTFOLIO -->
+<section id="work" class="section">
+
+    <div class="section-heading reveal">
+
+        <p class="eyebrow">SELECTED WORK</p>
+
+        <h2>
+            A collection of<br>
+            <span>creative work.</span>
+        </h2>
+
+    </div>
+
+    <div class="portfolio-grid">
+
+        <article class="project project-large reveal">
+
+            <div class="project-image project-one">
+                <span>SOCIAL MEDIA</span>
+            </div>
+
+            <div class="project-info">
+
+                <div>
+                    <p>01 / GRAPHIC DESIGN</p>
+                    <h3>Social Media Campaign</h3>
+                </div>
+
+                <a href="#contact">↗</a>
+
+            </div>
+
+        </article>
+
+        <article class="project reveal">
+
+            <div class="project-image project-two">
+                <span>BRANDING</span>
+            </div>
+
+            <div class="project-info">
+
+                <div>
+                    <p>02 / BRAND DESIGN</p>
+                    <h3>Modern Brand Identity</h3>
+                </div>
+
+                <a href="#contact">↗</a>
+
+            </div>
+
+        </article>
+
+        <article class="project reveal">
+
+            <div class="project-image project-three">
+                <span>DATA</span>
+            </div>
+
+            <div class="project-info">
+
+                <div>
+                    <p>03 / DATA</p>
+                    <h3>Data Dashboard</h3>
+                </div>
+
+                <a href="#contact">↗</a>
+
+            </div>
+
+        </article>
+
+        <article class="project project-wide reveal">
+
+            <div class="project-image project-four">
+                <span>GIS / MAPPING</span>
+            </div>
+
+            <div class="project-info">
+
+                <div>
+                    <p>04 / GIS</p>
+                    <h3>Geographic Data Visualization</h3>
+                </div>
+
+                <a href="#contact">↗</a>
+
+            </div>
+
+        </article>
+
+    </div>
+
+    <p class="portfolio-note">
+        Replace these sample projects with your actual portfolio pieces.
+    </p>
+
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section">
+
+    <div class="skills-grid">
+
+        <div class="reveal">
+
+            <p class="eyebrow">MY TOOLKIT</p>
+
+            <h2>
+                Tools I use to<br>
+                <span>get things done.</span>
+            </h2>
+
+            <p class="skills-description">
+                A combination of creative, analytical, technical,
+                and administrative skills allows me to handle
+                different types of digital projects.
+            </p>
+
+        </div>
+
+        <div class="skills-list reveal">
+
+            <div class="skill">
+                <span>Graphic Design</span>
+                <strong>90%</strong>
+                <i><b style="width:90%"></b></i>
+            </div>
+
+            <div class="skill">
+                <span>Data Management</span>
+                <strong>90%</strong>
+                <i><b style="width:90%"></b></i>
+            </div>
+
+            <div class="skill">
+                <span>Microsoft Office</span>
+                <strong>90%</strong>
+                <i><b style="width:90%"></b></i>
+            </div>
+
+            <div class="skill">
+                <span>GIS / Mapping</span>
+                <strong>85%</strong>
+                <i><b style="width:85%"></b></i>
+            </div>
+
+            <div class="skill">
+                <span>Data Analysis</span>
+                <strong>85%</strong>
+                <i><b style="width:85%"></b></i>
+            </div>
+
+            <div class="skill">
+                <span>Digital Content</span>
+                <strong>90%</strong>
+                <i><b style="width:90%"></b></i>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="software-cloud reveal">
+        <span>Adobe Photoshop</span>
+        <span>Canva</span>
+        <span>Power BI</span>
+        <span>Microsoft Excel</span>
+        <span>QGIS</span>
+        <span>AutoCAD</span>
+        <span>SketchUp</span>
+        <span>Google Workspace</span>
+    </div>
+
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section">
+
+    <div class="section-heading center reveal">
+
+        <p class="eyebrow">EXPERIENCE</p>
+
+        <h2>
+            Experience built on<br>
+            <span>real projects.</span>
+        </h2>
+
+    </div>
+
+    <div class="timeline">
+
+        <div class="timeline-item reveal">
+
+            <span class="timeline-dot"></span>
+
+            <div class="timeline-date">
+                Professional Experience
+            </div>
+
+            <div>
+                <h3>
+                    Data, Information & Project Support
+                </h3>
+
+                <p>
+                    Experience supporting project monitoring,
+                    information systems, data validation,
+                    mapping, reporting, procurement processing,
+                    and administrative operations.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="timeline-item reveal">
+
+            <span class="timeline-dot"></span>
+
+            <div class="timeline-date">
+                Creative Development
+            </div>
+
+            <div>
+                <h3>
+                    Graphic Design & Digital Content
+                </h3>
+
+                <p>
+                    Creating visual content, presentations,
+                    social media materials, photo editing,
+                    digital graphics, and creative concepts.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section contact">
+
+    <div class="contact-box reveal">
+
+        <p class="eyebrow">HAVE A PROJECT?</p>
+
+        <h2>
+            Let's make something<br>
+            <span>great together.</span>
+        </h2>
+
+        <p>
+            I'm open to graphic design, virtual assistance,
+            data, digital content, and other professional opportunities.
+        </p>
+
+        <a href="mailto:your@email.com" class="button primary">
+            Get In Touch <span>↗</span>
+        </a>
+
+        <div class="contact-links">
+
+            <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
+            <a href="https://www.facebook.com/" target="_blank">Facebook</a>
+            <a href="https://www.instagram.com/" target="_blank">Instagram</a>
+            <a href="https://github.com/" target="_blank">GitHub</a>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+
+    <div class="footer-logo">
+        Kevin.
+    </div>
+
+    <p>
+        © 2026 Kevin Remorosa. All rights reserved.
+    </p>
+
+    <a href="#home">
+        Back to top ↑
+    </a>
+
+</footer>
+
+<script>
+/* =========================================================
+   WEBTHREADS — VANILLA JAVASCRIPT VERSION
+========================================================= */
+
+const canvas = document.createElement("canvas");
+const container = document.getElementById("webthreads");
+container.appendChild(canvas);
+
+const gl = canvas.getContext("webgl2", {
+    alpha:true,
+    antialias:false,
+    premultipliedAlpha:true
+});
+
+if(gl){
+
+const vertexShaderSource = `#version 300 es
+in vec2 position;
+
+void main(){
+    gl_Position = vec4(position,0.0,1.0);
+}
+`;
+
+const fragmentShaderSource = `#version 300 es
+
+precision highp float;
+
+uniform vec2 iResolution;
+uniform float iTime;
+
+uniform float uSpeed;
+uniform float uThreadCount;
+uniform float uFrequency;
+uniform float uSpread;
+uniform float uTaper;
+uniform float uPosition;
+uniform float uGlow;
+uniform float uFalloff;
+uniform float uThickness;
+uniform float uBrightness;
+uniform float uOpacity;
+uniform float uMirror;
+uniform float uShimmer;
+uniform float uGrain;
+uniform float uGrainIntensity;
+
+uniform vec3 uColor1;
+uniform vec3 uColor2;
+uniform vec3 uColor3;
+
+uniform vec2 uMouse;
+uniform float uMouseStrength;
+uniform float uEnableMouse;
+uniform float uMouseActive;
+
+out vec4 fragColor;
+
+#define TAU 6.28318530718
+#define MAX_THREADS 10
+
+float glow(float x,float str,float dist){
+    return dist/pow(max(x,1e-4),str);
+}
+
+void main(){
+
+    vec2 uv=gl_FragCoord.xy/iResolution.xy;
+
+    float n=max(uThreadCount,1.0);
+
+    float pinchX=0.5;
+
+    if(uEnableMouse>0.5){
+        pinchX=mix(
+            pinchX,
+            uMouse.x,
+            clamp(uMouseStrength,0.0,1.0)*uMouseActive
+        );
+    }
+
+    float spreadDx=uSpread*abs(uv.x-pinchX);
+
+    float baseT=iTime*uSpeed;
+
+    float tauOverN=TAU/n;
+
+    float mirror=
+        uMirror>0.5
+        ? sign(pinchX-uv.x)
+        : 1.0;
+
+    float shimmerT=iTime*1.7;
+
+    float invThickness=1.0/max(uThickness,0.01);
+
+    float xFreq=uv.x*uFrequency;
+
+    float yOff=uv.y-uPosition;
+
+    float ciScale=n>1.0 ? 1.0/(n-1.0) : 0.0;
+
+    vec3 col=vec3(0.0);
+
+    float gsum=0.0;
+
+    for(int idx=0;idx<MAX_THREADS;idx++){
+
+        float i=float(idx);
+
+        if(i>=n)break;
+
+        float amplitude=spreadDx*(1.0+i*uTaper);
+
+        float shimmer=sin(shimmerT+i*1.3)*0.35;
+
+        float phase=(baseT+i*tauOverN)*mirror+shimmer;
+
+        float sdf=
+            abs(
+                yOff+
+                sin(xFreq+phase)*amplitude
+            )*invThickness;
+
+        float g=glow(
+            sdf,
+            uFalloff,
+            uGlow
+        );
+
+        float ci=i*ciScale;
+
+        vec3 threadCol=mix(
+            uColor1,
+            uColor2,
+            ci
+        );
+
+        col+=g*threadCol;
+        gsum+=g;
+    }
+
+    float coreAmt=smoothstep(
+        0.5,
+        2.2,
+        gsum
+    );
+
+    col=mix(
+        col,
+        uColor3*gsum,
+        coreAmt*0.5
+    );
+
+    float bright=uBrightness;
+
+    if(uEnableMouse>0.5){
+
+        vec2 md=uv-uMouse;
+        float d2=dot(md,md);
+
+        bright+=
+            clamp(uMouseStrength,0.0,1.0)*
+            uMouseActive*
+            exp(-d2*6.0)*
+            0.6;
+    }
+
+    col*=bright;
+
+    float alpha=
+        clamp(gsum,0.0,1.0)*
+        uOpacity;
+
+    vec3 outRgb=col*alpha;
+
+    if(uGrain>0.5){
+
+        float gv=
+            (
+                fract(
+                    sin(
+                        dot(
+                            gl_FragCoord.xy,
+                            vec2(12.9898,78.233)
+                        )+iTime
+                    )*
+                    43758.5453
+                )-0.5
+            )*
+            uGrainIntensity;
+
+        outRgb=clamp(
+            outRgb+gv,
+            0.0,
+            1.0
+        );
+
+        alpha=clamp(
+            alpha+gv,
+            0.0,
+            1.0
+        );
+    }
+
+    fragColor=vec4(
+        outRgb,
+        alpha
+    );
+}
+`;
+
+function createShader(type,source){
+
+    const shader=gl.createShader(type);
+
+    gl.shaderSource(shader,source);
+    gl.compileShader(shader);
+
+    if(!gl.getShaderParameter(
+        shader,
+        gl.COMPILE_STATUS
+    )){
+        console.error(
+            gl.getShaderInfoLog(shader)
+        );
+    }
+
+    return shader;
+}
+
+const vertexShader=createShader(
+    gl.VERTEX_SHADER,
+    vertexShaderSource
+);
+
+const fragmentShader=createShader(
+    gl.FRAGMENT_SHADER,
+    fragmentShaderSource
+);
+
+const program=gl.createProgram();
+
+gl.attachShader(program,vertexShader);
+gl.attachShader(program,fragmentShader);
+gl.linkProgram(program);
+
+if(!gl.getProgramParameter(
+    program,
+    gl.LINK_STATUS
+)){
+    console.error(
+        gl.getProgramInfoLog(program)
+    );
+}
+
+gl.useProgram(program);
+
+const vertices=new Float32Array([
+    -1,-1,
+     3,-1,
+    -1, 3
+]);
+
+const buffer=gl.createBuffer();
+
+gl.bindBuffer(
+    gl.ARRAY_BUFFER,
+    buffer
+);
+
+gl.bufferData(
+    gl.ARRAY_BUFFER,
+    vertices,
+    gl.STATIC_DRAW
+);
+
+const positionLocation=
+    gl.getAttribLocation(
+        program,
+        "position"
+    );
+
+gl.enableVertexAttribArray(
+    positionLocation
+);
+
+gl.vertexAttribPointer(
+    positionLocation,
+    2,
+    gl.FLOAT,
+    false,
+    0,
+    0
+);
+
+const uniforms={};
+
+[
+    "iResolution",
+    "iTime",
+    "uSpeed",
+    "uThreadCount",
+    "uFrequency",
+    "uSpread",
+    "uTaper",
+    "uPosition",
+    "uGlow",
+    "uFalloff",
+    "uThickness",
+    "uBrightness",
+    "uOpacity",
+    "uMirror",
+    "uShimmer",
+    "uGrain",
+    "uGrainIntensity",
+    "uColor1",
+    "uColor2",
+    "uColor3",
+    "uMouse",
+    "uMouseStrength",
+    "uEnableMouse",
+    "uMouseActive"
+].forEach(name=>{
+
+    uniforms[name]=
+        gl.getUniformLocation(
+            program,
+            name
+        );
+
+});
+
+function hexToRgb(hex){
+
+    const result=
+        /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i
+        .exec(hex);
+
+    if(!result)
+        return [1,1,1];
+
+    return [
+        parseInt(result[1],16)/255,
+        parseInt(result[2],16)/255,
+        parseInt(result[3],16)/255
+    ];
+}
+
+const color1=hexToRgb("#7C3AED");
+const color2=hexToRgb("#00D4FF");
+const color3=hexToRgb("#FFFFFF");
+
+gl.uniform1f(uniforms.uSpeed,0.15);
+gl.uniform1f(uniforms.uThreadCount,7);
+gl.uniform1f(uniforms.uFrequency,4.5);
+gl.uniform1f(uniforms.uSpread,0.22);
+gl.uniform1f(uniforms.uTaper,1.0);
+gl.uniform1f(uniforms.uPosition,0.5);
+gl.uniform1f(uniforms.uGlow,0.025);
+gl.uniform1f(uniforms.uFalloff,0.6);
+gl.uniform1f(uniforms.uThickness,1.1);
+gl.uniform1f(uniforms.uBrightness,0.75);
+gl.uniform1f(uniforms.uOpacity,0.8);
+gl.uniform1f(uniforms.uMirror,1.0);
+gl.uniform1f(uniforms.uShimmer,1.0);
+gl.uniform1f(uniforms.uGrain,1.0);
+gl.uniform1f(uniforms.uGrainIntensity,0.035);
+
+gl.uniform3fv(uniforms.uColor1,color1);
+gl.uniform3fv(uniforms.uColor2,color2);
+gl.uniform3fv(uniforms.uColor3,color3);
+
+gl.uniform1f(uniforms.uMouseStrength,0.35);
+gl.uniform1f(uniforms.uEnableMouse,1.0);
+gl.uniform2f(uniforms.uMouse,0.5,0.5);
+gl.uniform1f(uniforms.uMouseActive,0);
+
+let mouseX=.5;
+let mouseY=.5;
+let targetX=.5;
+let targetY=.5;
+let mouseActive=0;
+let targetActive=0;
+
+window.addEventListener(
+    "mousemove",
+    e=>{
+
+        targetX=e.clientX/window.innerWidth;
+
+        targetY=
+            1-
+            e.clientY/window.innerHeight;
+
+        targetActive=1;
+    }
+);
+
+window.addEventListener(
+    "mouseleave",
+    ()=>{
+        targetActive=0;
+    }
+);
+
+function resize(){
+
+    const dpr=
+        Math.min(
+            window.devicePixelRatio||1,
+            2
+        );
+
+    canvas.width=
+        window.innerWidth*dpr;
+
+    canvas.height=
+        window.innerHeight*dpr;
+
+    canvas.style.width=
+        window.innerWidth+"px";
+
+    canvas.style.height=
+        window.innerHeight+"px";
+
+    gl.viewport(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    gl.uniform2f(
+        uniforms.iResolution,
+        canvas.width,
+        canvas.height
+    );
+}
+
+window.addEventListener(
+    "resize",
+    resize
+);
+
+resize();
+
+const startTime=performance.now();
+
+function animate(time){
+
+    const seconds=
+        (time-startTime)/1000;
+
+    mouseX+=
+        .05*(targetX-mouseX);
+
+    mouseY+=
+        .05*(targetY-mouseY);
+
+    mouseActive+=
+        .05*(targetActive-mouseActive);
+
+    gl.uniform1f(
+        uniforms.iTime,
+        seconds
+    );
+
+    gl.uniform2f(
+        uniforms.uMouse,
+        mouseX,
+        mouseY
+    );
+
+    gl.uniform1f(
+        uniforms.uMouseActive,
+        mouseActive
+    );
+
+    gl.drawArrays(
+        gl.TRIANGLES,
+        0,
+        3
+    );
+
+    requestAnimationFrame(animate);
+}
+
+requestAnimationFrame(animate);
+
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+const navbar=
+    document.getElementById("navbar");
+
+const menuButton=
+    document.getElementById("menuButton");
+
+const navLinks=
+    document.getElementById("navLinks");
+
+window.addEventListener(
+    "scroll",
+    ()=>{
+        navbar.classList.toggle(
+            "scrolled",
+            window.scrollY>40
+        );
+    }
+);
+
+menuButton.addEventListener(
+    "click",
+    ()=>{
+        navLinks.classList.toggle(
+            "active"
+        );
+    }
+);
+
+document.querySelectorAll(
+    ".nav-links a"
+).forEach(link=>{
+
+    link.addEventListener(
+        "click",
+        ()=>{
+            navLinks.classList.remove(
+                "active"
+            );
+        }
+    );
+
+});
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const observer=
+    new IntersectionObserver(
+        entries=>{
+
+            entries.forEach(entry=>{
+
+                if(entry.isIntersecting){
+
+                    entry.target.classList.add(
+                        "visible"
+                    );
+
+                    observer.unobserve(
+                        entry.target
+                    );
+                }
+
+            });
+
+        },
+        {
+            threshold:.12
+        }
+    );
+
+document.querySelectorAll(
+    ".reveal"
+).forEach(element=>{
+    observer.observe(element);
+});
+
+/* =========================================================
+   CLOSE MOBILE MENU WHEN CLICKING OUTSIDE
+========================================================= */
+
+document.addEventListener(
+    "click",
+    event=>{
+
+        if(
+            !navLinks.contains(event.target) &&
+            !menuButton.contains(event.target)
+        ){
+            navLinks.classList.remove(
+                "active"
+            );
+        }
+
+    }
+);
+
+/* =========================================================
+   BACKGROUND MUSIC
+========================================================= */
+
+const backgroundMusic=
+    document.getElementById(
+        "backgroundMusic"
+    );
+
+const soundToggle=
+    document.getElementById(
+        "soundToggle"
+    );
+
+/* Low background volume */
+backgroundMusic.volume=0.12;
+
+let soundEnabled=false;
+
+/*
+   Browsers normally block autoplay with sound.
+   The first user interaction starts the music.
+*/
+
+function startBackgroundMusic(){
+
+    if(soundEnabled) return;
+
+    backgroundMusic.play()
+        .then(()=>{
+
+            soundEnabled=true;
+
+            soundToggle.textContent="🔊";
+
+            soundToggle.classList.add(
+                "active"
+            );
+
+        })
+        .catch(()=>{
+
+            console.log(
+                "Audio requires user interaction."
+            );
+
+        });
+}
+
+/* Start music after first interaction */
+document.addEventListener(
+    "click",
+    function(event){
+
+        if(event.target===soundToggle)
+            return;
+
+        startBackgroundMusic();
+
+    },
+    {once:true}
+);
+
+/* Sound ON/OFF button */
+soundToggle.addEventListener(
+    "click",
+    function(){
+
+        if(backgroundMusic.paused){
+
+            backgroundMusic.play()
+                .then(()=>{
+
+                    soundEnabled=true;
+
+                    soundToggle.textContent="🔊";
+
+                    soundToggle.classList.add(
+                        "active"
+                    );
+
+                });
+
+        }else{
+
+            backgroundMusic.pause();
+
+            soundEnabled=false;
+
+            soundToggle.textContent="🔇";
+
+            soundToggle.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
